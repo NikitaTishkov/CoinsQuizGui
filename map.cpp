@@ -10,10 +10,10 @@ Map::Map(QWidget *parent, int raws, int cols) :
 
     ui->setupUi(this);
     QGridLayout *Layer = new QGridLayout(this);
-    m_aCells = new Cell*[raws];
+    m_aCells = new City*[raws];
     for(int i = 0; i < raws; i++)
     {
-        m_aCells[i] = new Cell[cols];
+       m_aCells[i] = new City[cols];
     }
     for(int i = 0; i < raws; i++)
     {

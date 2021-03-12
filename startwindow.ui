@@ -17,8 +17,8 @@
    <widget class="QLineEdit" name="input_cols">
     <property name="geometry">
      <rect>
-      <x>80</x>
-      <y>80</y>
+      <x>280</x>
+      <y>90</y>
       <width>113</width>
       <height>24</height>
      </rect>
@@ -27,8 +27,8 @@
    <widget class="QLineEdit" name="input_raws">
     <property name="geometry">
      <rect>
-      <x>280</x>
-      <y>80</y>
+      <x>70</x>
+      <y>90</y>
       <width>113</width>
       <height>24</height>
      </rect>
