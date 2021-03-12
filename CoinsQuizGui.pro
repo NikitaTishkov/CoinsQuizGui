@@ -10,12 +10,15 @@ CONFIG += c++11
 
 SOURCES += \
     main.cpp \
+    map.cpp \
     startwindow.cpp
 
 HEADERS += \
+    map.h \
     startwindow.h
 
 FORMS += \
+    map.ui \
     startwindow.ui
 
 # Default rules for deployment.
