@@ -3,11 +3,11 @@
 
 #include "cell.h"
 
-class City : public Cell
+class City : public QPushButton
 {
     Q_OBJECT
 public:
-    explicit City(Cell *parent = nullptr);
+    explicit City(QPushButton *parent = nullptr);
 
 signals:
 
