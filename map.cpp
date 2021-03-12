@@ -1,14 +1,27 @@
 #include "map.h"
 #include "ui_map.h"
-
+#define MIN(a, b) (a < b) ? a : b
 Map::Map(QWidget *parent, int raws, int cols) :
     QDialog(parent),
     ui(new Ui::Map),
     m_iSize_x(cols),
     m_iSize_y(raws)
 {
-    ui->setupUi(this);
 
+    ui->setupUi(this);
+    QGridLayout *Layer = new QGridLayout(this);
+    m_aCells = new Cell*[raws];
+    for(int i = 0; i < raws; i++)
+    {
+        m_aCells[i] = new Cell[cols];
+    }
+    for(int i = 0; i < raws; i++)
+    {
+        for(int j = 0; j < cols; j++)
+        {
+            Layer->addWidget(&m_aCells[i][j], i + 1, j + 1, Qt::AlignCenter);
+        }
+    }
 }
 
 Map* Map::ptrMap_ = nullptr;
@@ -16,7 +29,12 @@ Map* Map::ptrMap_ = nullptr;
 Map::~Map()
 {
     delete ui;
+
+    for(int i = 0; i < this->m_iSize_y; i++)
+        delete[] m_aCells;
+
     delete ptrMap_;
+
 }
 
 /* Getting singleton Object */

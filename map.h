@@ -1,7 +1,11 @@
 #ifndef MAP_H
 #define MAP_H
+
+#include "city.h"
 #include <QVector>
+#include <QVector2D>
 #include <QDialog>
+#include <QGridLayout>
 
 namespace Ui {
 class Map;
@@ -32,7 +36,8 @@ protected:
     static Map *ptrMap_;
     explicit Map(QWidget *parent = nullptr, int iRaws = 0, int iCols = 0);
     /* TODO: QVector Countries */
-    /* TODO: QVector Cities */
+
+    Cell **m_aCells;
 
 private:
     Ui::Map *ui;
