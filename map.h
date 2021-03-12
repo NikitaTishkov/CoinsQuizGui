@@ -37,7 +37,7 @@ protected:
     explicit Map(QWidget *parent = nullptr, int iRaws = 0, int iCols = 0);
     /* TODO: QVector Countries */
 
-    Cell **m_aCells;
+    City **m_aCells;
 
 private:
     Ui::Map *ui;

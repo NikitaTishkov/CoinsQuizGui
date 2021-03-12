@@ -1,6 +1,6 @@
 #include "city.h"
 
-City::City(Cell *parent) : Cell(parent)
+City::City(QPushButton *parent) : QPushButton(parent)
 {
 
 }
