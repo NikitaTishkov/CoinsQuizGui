@@ -8,14 +8,16 @@ class City : public QPushButton
     Q_OBJECT
 public:
     explicit City(QPushButton *parent = nullptr);
+    City(QPushButton *parent, int X, int Y, bool bIsCity);
+    void SetCellParams(int X, int Y, bool bIsCity = false);
 
     /* Set of function for manipulating
      *              Coords*/
     void SetCoord(int xNew, int yNew);
     void SetCoordX(int xNew);
     void SetCoordY(int yNew);
-    int GetCoordX();
-    int GetCoordY();
+    Point GetCoord();
+
 
     void SetCityOrCell(bool bIsCityNew);
     bool GetCityOrCell();

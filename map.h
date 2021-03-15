@@ -1,6 +1,7 @@
 #ifndef MAP_H
 #define MAP_H
 
+#include "country.h"
 #include "city.h"
 #include <QVector>
 #include <QVector2D>
@@ -8,7 +9,7 @@
 #include <QGridLayout>
 
 namespace Ui {
-class Map;
+    class Map;
 }
 
 class Map : public QDialog
@@ -33,17 +34,20 @@ public:
     void CreatingMapViewModel(QGridLayout *Layout);
 
     static Map* MakeMap(int iCols, int iRaws);
-
+    void IncCountryNum(int Inc);
 protected:
 
     static Map *ptrMap_;
     explicit Map(QWidget *parent = nullptr, int iRaws = 0, int iCols = 0);
-    /* TODO: QVector Countries */
+
 
     City **m_aCells;
+    QVector<Country*> m_aCountries;
 
 
 
+private slots:
+    void on_AddCountryButton_clicked();
 
 private:
     Ui::Map *ui;
