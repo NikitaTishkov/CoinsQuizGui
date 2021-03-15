@@ -27,7 +27,10 @@ public:
     int GetSizeX() {return this->m_iSize_x; };
     int GetSizeY() {return this->m_iSize_y; };
     int GetCountryNumber() {return this->m_iCountryNumber; };
+    void FillingCells(City **aCellsNew);
 
+    /* Can be EDITED in future */
+    void CreatingMapViewModel(QGridLayout *Layout);
 
     static Map* MakeMap(int iCols, int iRaws);
 
@@ -38,6 +41,9 @@ protected:
     /* TODO: QVector Countries */
 
     City **m_aCells;
+
+
+
 
 private:
     Ui::Map *ui;

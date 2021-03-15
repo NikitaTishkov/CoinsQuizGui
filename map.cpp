@@ -1,6 +1,19 @@
 #include "map.h"
 #include "ui_map.h"
 #define MIN(a, b) (a < b) ? a : b
+
+void Map::CreatingMapViewModel(QGridLayout *Layout)
+{
+    for(int i = 0; i < this->m_iSize_y; i++)
+    {
+        for(int j = 0; j < m_iSize_x; j++)
+        {
+            Layout->addWidget(&m_aCells[i][j], i + 1, j + 1, Qt::AlignCenter);
+        }
+    }
+}
+
+
 Map::Map(QWidget *parent, int raws, int cols) :
     QDialog(parent),
     ui(new Ui::Map),
@@ -9,19 +22,14 @@ Map::Map(QWidget *parent, int raws, int cols) :
 {
 
     ui->setupUi(this);
-    QGridLayout *Layer = new QGridLayout(this);
+    QGridLayout *MainMapLayout = ui->MainMapLayout;
     m_aCells = new City*[raws];
-    for(int i = 0; i < raws; i++)
-    {
-       m_aCells[i] = new City[cols];
-    }
-    for(int i = 0; i < raws; i++)
-    {
-        for(int j = 0; j < cols; j++)
-        {
-            Layer->addWidget(&m_aCells[i][j], i + 1, j + 1, Qt::AlignCenter);
-        }
-    }
+
+    FillingCells(m_aCells);
+
+    CreatingMapViewModel(MainMapLayout);
+
+
 }
 
 Map* Map::ptrMap_ = nullptr;
@@ -31,9 +39,9 @@ Map::~Map()
     delete ui;
 
     for(int i = 0; i < this->m_iSize_y; i++)
-        delete[] m_aCells;
+        delete[] m_aCells[i];
 
-    delete ptrMap_;
+    free (ptrMap_);
 
 }
 
@@ -58,5 +66,13 @@ Map *Map::MakeMap(int iCols, int iRaws)
 {
     Map* ptrNewMap = Map::GetInstance(iCols, iRaws);
     return ptrNewMap;
+}
+
+void Map::FillingCells(City **aCellsNew)
+{
+    for(int i = 0; i < this->m_iSize_y; i++)
+    {
+       aCellsNew[i] = new City[this->m_iSize_x];
+    }
 }
 
