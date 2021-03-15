@@ -26,6 +26,8 @@ void StartWindow::on_pushButton_clicked()
     iRawsNew = qsRawsInput.toInt();
 
     Map *map = Map::MakeMap(iColsNew, iRawsNew);
+    //map->setAttribute(Qt::WA_DeleteOnClose);
     map->exec();
+    //map->done(map_close_val);
 
 }

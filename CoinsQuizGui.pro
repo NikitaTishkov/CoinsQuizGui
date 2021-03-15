@@ -10,13 +10,17 @@ CONFIG += c++11
 
 SOURCES += \
     city.cpp \
+    country.cpp \
     main.cpp \
     map.cpp \
+    point.cpp \
     startwindow.cpp
 
 HEADERS += \
     city.h \
+    country.h \
     map.h \
+    point.h \
     startwindow.h
 
 FORMS += \
