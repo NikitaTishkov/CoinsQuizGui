@@ -2,6 +2,7 @@
 #define COUNTRY_H
 #include "city.h"
 #include "point.h"
+
 #include <QVector>
 class Country
 {
@@ -24,6 +25,10 @@ public:
     Point GetEndCoord();
     void SetStartCoord(int X, int Y);
     void SetEndCoord(int X, int Y);
+    QVector<City*> GetCitiesVector();
+    void UpdateVaultInfoCountry();
+
+
 
 };
 

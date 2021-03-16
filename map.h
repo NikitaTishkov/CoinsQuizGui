@@ -35,10 +35,18 @@ public:
 
     static Map* MakeMap(int iCols, int iRaws);
     void IncCountryNum(int Inc);
+
+    City* FindCityByCoords(int X, int Y);
+
+    void InitTransactionForCountry(Map *map, Country *country);
+    void UpdateMap();
+
+    int GetDaysWorked();
+    void IncreaseDaysWorked(int iVal);
 protected:
 
     static Map *ptrMap_;
-    explicit Map(QWidget *parent = nullptr, int iRaws = 0, int iCols = 0);
+    explicit Map(QWidget *parent = nullptr, int iRaws = 0, int iCols = 0, int DayStart = 0);
 
 
     City **m_aCells;
@@ -49,11 +57,15 @@ protected:
 private slots:
     void on_AddCountryButton_clicked();
 
+    void on_StepButton_clicked();
+
 private:
     Ui::Map *ui;
     int m_iSize_x;
     int m_iSize_y;
     int m_iCountryNumber;
+    int m_iDaysWorked;
+
 
 };
 

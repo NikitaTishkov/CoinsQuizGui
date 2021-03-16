@@ -10,7 +10,8 @@ Country::Country(int ID, Point StartP, Point EndP, City **aCities)
         for(int j = StartP.GetX(); j <= EndP.GetX(); j++)
         {
             aCities[i][j].SetCountryID(ID);
-            aCities[i][j].SetCityOrCell(true);
+            aCities[i][j].SetIsCity(true);
+            aCities[i][j].ChangeVaultVal(ID, INITIAL_COINS_IN_CITY);
             QString qs_id = QString::number(ID);
             aCities[i][j].setText(qs_id);
             this->m_aCities.push_back(&aCities[i][j]);
@@ -38,4 +39,17 @@ Point Country::GetStartCoord()
 Point Country::GetEndCoord()
 {
     return this->m_EndPoint;
+}
+
+QVector<City*> Country::GetCitiesVector()
+{
+    return this->m_aCities;
+}
+
+void Country::UpdateVaultInfoCountry()
+{
+    for(int i = 0; i < this->m_aCities.size(); i++)
+    {
+        this->m_aCities[i]->UpdateCityInfo();
+    }
 }
