@@ -27,7 +27,7 @@ public:
     void SetEndCoord(int X, int Y);
     QVector<City*> GetCitiesVector();
     void UpdateVaultInfoCountry();
-
+    bool CheckVaultNumber(int iNum);
 
 
 };

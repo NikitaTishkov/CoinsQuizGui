@@ -7,7 +7,8 @@
 #include <QVector2D>
 #include <QDialog>
 #include <QGridLayout>
-
+#include <QMessageBox>
+#include <QMap>
 namespace Ui {
     class Map;
 }
@@ -43,6 +44,8 @@ public:
 
     int GetDaysWorked();
     void IncreaseDaysWorked(int iVal);
+
+
 protected:
 
     static Map *ptrMap_;
@@ -59,6 +62,8 @@ private slots:
 
     void on_StepButton_clicked();
 
+
+
 private:
     Ui::Map *ui;
     int m_iSize_x;
@@ -66,9 +71,16 @@ private:
     int m_iCountryNumber;
     int m_iDaysWorked;
 
+    bool CheckCountryOverlay(Point start, Point end);
+    bool CheckAll();
+
+
 
 };
 
 bool CheckMapSize(int raws, int cols);
+bool IsRangesOverlay(int StartX1, int EndX1, int StartX2, int EndX2);
+
+
 
 #endif // MAP_H
