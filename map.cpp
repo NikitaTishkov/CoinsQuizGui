@@ -21,6 +21,9 @@ Map::Map(QWidget *parent, int raws, int cols, int DaysStart) :
 
 }
 
+
+
+
 Map* Map::ptrMap_ = nullptr;
 
 Map::~Map()
@@ -47,6 +50,62 @@ Map *Map::GetInstance( int colums, int raws)
 bool CheckMapSize(int raws, int cols)
 {
     return (raws > 0 && cols > 0);
+}
+bool IsRangesOverlay(int StartX1, int EndX1, int StartX2, int EndX2)
+{
+    int aCouCheckCoordsX[2] = {
+        StartX1,
+        EndX1
+    };
+    int aCouCheckCoordsNewX[2] = {
+        StartX2,
+        EndX2
+    };
+    int *aFirstRange;
+    int *aSecondRange;
+    if(aCouCheckCoordsNewX[0] < aCouCheckCoordsX[0])
+    {
+        aFirstRange = aCouCheckCoordsNewX;
+        aSecondRange = aCouCheckCoordsX;
+    }
+    else
+    {
+        aFirstRange = aCouCheckCoordsX;
+        aSecondRange = aCouCheckCoordsNewX;
+    }
+
+    if(aSecondRange[0] >= aFirstRange[0] &&
+            aSecondRange[0] <= aFirstRange[1])
+    {
+        return true;
+    }
+    else
+    {
+        return false;
+    }
+}
+
+bool Map::CheckCountryOverlay(Point start, Point end)
+{
+    for(int i = 0; i < this->m_aCountries.size(); i++)
+    {
+        bool IsXOverlay = IsRangesOverlay(this->m_aCountries[i]->GetStartCoord().GetX(),
+                                          this->m_aCountries[i]->GetEndCoord().GetX(),
+                                          start.GetX(),
+                                          end.GetX());
+        if(IsXOverlay)
+        {
+            bool IsYOverlay = IsRangesOverlay(this->m_aCountries[i]->GetStartCoord().GetY(),
+                                              this->m_aCountries[i]->GetEndCoord().GetY(),
+                                              start.GetY(),
+                                              end.GetY());
+            if(IsYOverlay)
+            {
+                return true;
+            }
+        }
+    }
+    return false;
 }
 
 /* Creating Map */
@@ -153,20 +212,65 @@ void Map::IncreaseDaysWorked(int iVal)
 
 void Map::on_AddCountryButton_clicked()
 {
-    this->IncCountryNum(1);
-    Point start(ui->inputStartX->text().toInt(),
-                ui->inputStartY->text().toInt()
+
+    bool bCheckStartX, bCheckStartY, bCheckEndX, bCheckEndY;
+
+    Point start(ui->inputStartX->text().toInt(&bCheckStartX, 10),
+                ui->inputStartY->text().toInt(&bCheckStartY, 10)
                 );
-
-    Point end(ui->inputEndX->text().toInt(),
-              ui->inputEndY->text().toInt()
+    Point end(ui->inputEndX->text().toInt(&bCheckEndX, 10),
+              ui->inputEndY->text().toInt(&bCheckEndY, 10)
               );
+    if(bCheckStartX
+            && bCheckStartY
+            && bCheckEndX
+            && bCheckEndY
+            && start.GetX() >= 1
+            && start.GetY() >= 1
+            && end.GetX() >= 1
+            && end.GetY() >= 1)
+    {
+        bool IsCountryOverlay = CheckCountryOverlay(start, end);
 
-    Country *pNewCountry = new Country(this->GetCountryNumber(), start, end, this->m_aCells);
+        if(IsCountryOverlay)
+        {
+            QMessageBox ErrOverlayMsg;
+            ErrOverlayMsg.setWindowTitle("Error!");
+            ErrOverlayMsg.setText("Incorrect input");
+            ErrOverlayMsg.setInformativeText("Please do not overlay previous countries");
+            ErrOverlayMsg.exec();
+        }
+        else
+        {
+            start.SetX(start.GetX() - 1);
+            start.SetY(start.GetY() - 1);
+            end.SetX(end.GetX() - 1);
+            end.SetY(end.GetY() - 1);
+            Country *pNewCountry = new Country(this->GetCountryNumber(), start, end, this->m_aCells);
 
-    this->m_aCountries.push_back(pNewCountry);
+            this->m_aCountries.push_back(pNewCountry);
+            this->IncCountryNum(1);
+            ui->CountryNum->setText(QString::number(this->GetCountryNumber()));
+        }
+    }
+    else
+    {
+        QMessageBox ErrInputMsg;
+        ErrInputMsg.setWindowTitle("Error!");
+        ErrInputMsg.setText("Incorrect input");
+        ErrInputMsg.setInformativeText("Please input integer coords > 0");
+        ErrInputMsg.exec();
+    }
+}
 
-    ui->CountryNum->setText(QString::number(this->GetCountryNumber()));
+bool Map::CheckAll()
+{
+    for(int i = 0; i < this->m_aCountries.size(); i++)
+    {
+        if(!this->m_aCountries[i]->CheckVaultNumber(m_aCountries.size()))
+            return false;
+    }
+    return true;
 }
 
 void Map::on_StepButton_clicked()
@@ -175,6 +279,16 @@ void Map::on_StepButton_clicked()
     this->IncreaseDaysWorked(iStepsNum);
     for(int j = 0; j < iStepsNum; j++)
     {
+        if(CheckAll())
+        {
+            this->IncreaseDaysWorked(j + 1);
+            QMessageBox DoneMsg;
+            DoneMsg.setWindowTitle("Done!");
+            DoneMsg.setText("All Cities have all currencies");
+            DoneMsg.setInformativeText("Days: " + QString::number(this->GetDaysWorked()));
+            DoneMsg.exec();
+
+        }
         for(int i = 0; i < this->m_aCountries.size(); i++)
             this->InitTransactionForCountry(this ,this->m_aCountries[i]);
     }

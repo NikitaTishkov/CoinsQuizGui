@@ -1,5 +1,5 @@
 #include "city.h"
-
+#include <time.h>
 City::City(QPushButton *parent) : QPushButton(parent)
 {
 
@@ -178,4 +178,12 @@ void City::UpdateCityInfo()
     }
 
     this->setText(WalletInfo);
+}
+
+bool City::IsThereAllCurrsInCity(int iNum)
+{
+    if(this->m_aVault.size() == iNum)
+        return true;
+
+    return false;
 }

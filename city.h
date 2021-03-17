@@ -39,6 +39,7 @@ public:
 
     void SendMoney(City *Neighb);
     void UpdateCityInfo();
+    bool IsThereAllCurrsInCity(int iNum);
 private:
     Point m_Coord;
     /* If it is City = true */
