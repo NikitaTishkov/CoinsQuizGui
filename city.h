@@ -9,6 +9,13 @@
 class City : public QPushButton
 {
     Q_OBJECT
+private:
+    Point m_Coord;
+    /* If it is City = true */
+    bool m_bIsCity;
+    int m_iCountryID;
+    QMap<int, int> m_aVault;
+
 public:
     explicit City(QPushButton *parent = nullptr);
     City(QPushButton *parent, int X, int Y, bool bIsCity);
@@ -40,12 +47,7 @@ public:
     void SendMoney(City *Neighb);
     void UpdateCityInfo();
     bool IsThereAllCurrsInCity(int iNum);
-private:
-    Point m_Coord;
-    /* If it is City = true */
-    bool m_bIsCity;
-    int m_iCountryID;
-    QMap<int, int> m_aVault;
+
 signals:
 
 };

@@ -1,5 +1,5 @@
 #include "country.h"
-
+/* List of colors grabbing by program to paint Countries */
 QString COLORS[8] = {
     "red",
     "lime",
@@ -31,7 +31,7 @@ Country::Country(int ID, Point StartP, Point EndP, City **aCities)
         }
     }
 }
-
+/* Setters - getters */
 void Country::SetStartCoord(int X, int Y)
 {
     this->m_StartPoint.SetX(X);
@@ -58,7 +58,8 @@ QVector<City*> Country::GetCitiesVector()
 {
     return this->m_aCities;
 }
-
+/*--------------------------------*/
+/* Visualize info about all cities in country */
 void Country::UpdateVaultInfoCountry()
 {
     for(int i = 0; i < this->m_aCities.size(); i++)
@@ -66,7 +67,7 @@ void Country::UpdateVaultInfoCountry()
         this->m_aCities[i]->UpdateCityInfo();
     }
 }
-
+/* Cheks if all cities have all currencies in cuntry */
 bool Country::CheckVaultNumber(int iNum)
 {
 

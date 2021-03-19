@@ -1,7 +1,7 @@
 #include "map.h"
 #include "ui_map.h"
 #define MIN(a, b) (a < b) ? a : b
-
+/* Creating UI and Attaching Cells to GridLayout */
 Map::Map(QWidget *parent, int raws, int cols, int DaysStart) :
     QDialog(parent),
     ui(new Ui::Map),
@@ -20,10 +20,7 @@ Map::Map(QWidget *parent, int raws, int cols, int DaysStart) :
     CreatingMapViewModel(MainMapLayout);
 
 }
-
-
-
-
+/* Singletones behavior functions */
 Map* Map::ptrMap_ = nullptr;
 
 Map::~Map()
@@ -51,6 +48,7 @@ bool CheckMapSize(int raws, int cols)
 {
     return (raws > 0 && cols > 0);
 }
+/* Helper function that checks if one range layover another */
 bool IsRangesOverlay(int StartX1, int EndX1, int StartX2, int EndX2)
 {
     int aCouCheckCoordsX[2] = {
@@ -84,7 +82,7 @@ bool IsRangesOverlay(int StartX1, int EndX1, int StartX2, int EndX2)
         return false;
     }
 }
-
+/* Checking Squares overlaying */
 bool Map::CheckCountryOverlay(Point start, Point end)
 {
     for(int i = 0; i < this->m_aCountries.size(); i++)
@@ -116,6 +114,7 @@ Map *Map::MakeMap(int iCols, int iRaws)
     return ptrNewMap;
 }
 
+/* Filling the composition of Map`s cells */
 void Map::FillingCells(City **aCellsNew)
 {
     for(int i = 0; i < this->m_iSize_y; i++)
@@ -132,6 +131,7 @@ void Map::FillingCells(City **aCellsNew)
     }
 }
 
+/* Adds buttons to GridLayout */
 void Map::CreatingMapViewModel(QGridLayout *Layout)
 {
     for(int i = 0; i < this->m_iSize_y; i++)
@@ -143,12 +143,13 @@ void Map::CreatingMapViewModel(QGridLayout *Layout)
         }
     }
 }
-
+/* Increase country counter */
 void Map::IncCountryNum(int Inc)
 {
     this->m_iCountryNumber += Inc;
 }
 
+/* Getting reference by coords */
 City* Map::FindCityByCoords(int X, int Y)
 {
     if( X >= this->GetSizeX()
@@ -164,6 +165,7 @@ City* Map::FindCityByCoords(int X, int Y)
     return &this->m_aCells[Y][X];
 }
 
+/* Initialize sending money from all cities in country */
 void Map::InitTransactionForCountry(Map *map, Country *country)
 {
     QVector<City*> aCities = country->GetCitiesVector();
@@ -191,7 +193,7 @@ void Map::InitTransactionForCountry(Map *map, Country *country)
             aCities[i]->SendMoney(Neighbour);
     }
 }
-
+/* Visualize changes on the mao */
 void Map::UpdateMap()
 {
     for(int i = 0; i < this->m_aCountries.size(); i++)
@@ -199,7 +201,7 @@ void Map::UpdateMap()
         this->m_aCountries[i]->UpdateVaultInfoCountry();
     }
 }
-
+/* Manipulating with Days counter */
 int Map::GetDaysWorked()
 {
     return this->m_iDaysWorked;
@@ -209,7 +211,7 @@ void Map::IncreaseDaysWorked(int iVal)
 {
     this->m_iDaysWorked += iVal;
 }
-
+/* Handle country creation */
 void Map::on_AddCountryButton_clicked()
 {
 
@@ -263,6 +265,7 @@ void Map::on_AddCountryButton_clicked()
     }
 }
 
+/* Checking if all countries have each other currencies */
 bool Map::CheckAll()
 {
     for(int i = 0; i < this->m_aCountries.size(); i++)
@@ -273,6 +276,7 @@ bool Map::CheckAll()
     return true;
 }
 
+/* Stepping through days */
 void Map::on_StepButton_clicked()
 {
     int iStepsNum = ui->inputStep->text().toInt();
@@ -287,6 +291,7 @@ void Map::on_StepButton_clicked()
             DoneMsg.setText("All Cities have all currencies");
             DoneMsg.setInformativeText("Days: " + QString::number(this->GetDaysWorked()));
             DoneMsg.exec();
+            break;
 
         }
         for(int i = 0; i < this->m_aCountries.size(); i++)

@@ -14,7 +14,7 @@ StartWindow::~StartWindow()
     delete ui;
 }
 
-
+/* Creating Map Handler */
 void StartWindow::on_pushButton_clicked()
 {
 

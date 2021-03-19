@@ -11,6 +11,9 @@ class StartWindow : public QMainWindow
 {
     Q_OBJECT
 
+private:
+    Ui::StartWindow *ui;
+
 public:
     StartWindow(QWidget *parent = nullptr);
     ~StartWindow();
@@ -18,7 +21,5 @@ public:
 private slots:
     void on_pushButton_clicked();
 
-private:
-    Ui::StartWindow *ui;
 };
 #endif // STARTWINDOW_H

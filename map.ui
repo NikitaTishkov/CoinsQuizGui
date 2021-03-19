@@ -25,27 +25,7 @@
     <layout class="QHBoxLayout" name="ControllsLayout">
      <item>
       <layout class="QGridLayout" name="CoordsLayout">
-       <item row="1" column="6">
-        <widget class="QLineEdit" name="inputEndY">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
-       </item>
-       <item row="1" column="5">
-        <widget class="QLineEdit" name="inputEndX">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="6">
+       <item row="0" column="8">
         <widget class="QLineEdit" name="inputStartY">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -62,6 +42,16 @@
          </property>
         </widget>
        </item>
+       <item row="1" column="6">
+        <widget class="QLineEdit" name="inputEndX">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
        <item row="0" column="4">
         <widget class="QLabel" name="TextStartP">
          <property name="text">
@@ -69,7 +59,47 @@
          </property>
         </widget>
        </item>
-       <item row="0" column="5">
+       <item row="0" column="1">
+        <widget class="QLineEdit" name="inputStep"/>
+       </item>
+       <item row="0" column="2">
+        <widget class="QPushButton" name="AddCountryButton">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="text">
+          <string>Add Country</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="8">
+        <widget class="QLineEdit" name="inputEndY">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0">
+        <widget class="QLabel" name="StepText">
+         <property name="text">
+          <string>Steps:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="5">
+        <widget class="QLabel" name="label_2">
+         <property name="text">
+          <string>X:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="6">
         <widget class="QLineEdit" name="inputStartX">
          <property name="sizePolicy">
           <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
@@ -103,33 +133,31 @@
          </item>
         </layout>
        </item>
-       <item row="0" column="1">
-        <widget class="QLineEdit" name="inputStep"/>
-       </item>
-       <item row="0" column="2">
-        <widget class="QPushButton" name="AddCountryButton">
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="text">
-          <string>Add Country</string>
-         </property>
-        </widget>
-       </item>
-       <item row="0" column="0">
-        <widget class="QLabel" name="StepText">
-         <property name="text">
-          <string>Steps:</string>
-         </property>
-        </widget>
-       </item>
        <item row="1" column="1">
         <widget class="QPushButton" name="StepButton">
          <property name="text">
           <string>Start</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="5">
+        <widget class="QLabel" name="label">
+         <property name="text">
+          <string>X:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="7">
+        <widget class="QLabel" name="label_3">
+         <property name="text">
+          <string>Y:</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="7">
+        <widget class="QLabel" name="label_4">
+         <property name="text">
+          <string>Y:</string>
          </property>
         </widget>
        </item>

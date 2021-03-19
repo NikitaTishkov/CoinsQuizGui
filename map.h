@@ -17,6 +17,25 @@ class Map : public QDialog
 {
     Q_OBJECT
 
+private:
+    Ui::Map *ui;
+    int m_iSize_x;
+    int m_iSize_y;
+    int m_iCountryNumber;
+    int m_iDaysWorked;
+
+    bool CheckCountryOverlay(Point start, Point end);
+    bool CheckAll();
+
+protected:
+
+    static Map *ptrMap_;
+    explicit Map(QWidget *parent = nullptr, int iRaws = 0, int iCols = 0, int DayStart = 0);
+
+
+    City **m_aCells;
+    QVector<Country*> m_aCountries;
+
 public:
 
     ~Map();
@@ -46,38 +65,13 @@ public:
     void IncreaseDaysWorked(int iVal);
 
 
-protected:
-
-    static Map *ptrMap_;
-    explicit Map(QWidget *parent = nullptr, int iRaws = 0, int iCols = 0, int DayStart = 0);
-
-
-    City **m_aCells;
-    QVector<Country*> m_aCountries;
-
-
-
 private slots:
     void on_AddCountryButton_clicked();
 
     void on_StepButton_clicked();
 
-
-
-private:
-    Ui::Map *ui;
-    int m_iSize_x;
-    int m_iSize_y;
-    int m_iCountryNumber;
-    int m_iDaysWorked;
-
-    bool CheckCountryOverlay(Point start, Point end);
-    bool CheckAll();
-
-
-
 };
-
+/* Class independent functions */
 bool CheckMapSize(int raws, int cols);
 bool IsRangesOverlay(int StartX1, int EndX1, int StartX2, int EndX2);
 

@@ -106,7 +106,7 @@ int City::GetVaultSum()
     }
     return iSum;
 }
-
+/* Checking if city is near to another */
 bool City::IsNeighbourTo(City Neighb)
 {
     if(Neighb.GetIsCity())
@@ -118,7 +118,7 @@ bool City::IsNeighbourTo(City Neighb)
     }
     return false;
 }
-
+/* Sending money between two cities */
 void City::SendMoney(City *Neighb)
 {
     for(int i = 1; i <= COINS_PER_DAY; i++)
@@ -166,7 +166,7 @@ void City::SendMoney(City *Neighb)
         }
     }
 }
-
+/* Illustrate data of City */
 void City::UpdateCityInfo()
 {
     QString WalletInfo = tr("ID: ") +
@@ -179,7 +179,7 @@ void City::UpdateCityInfo()
 
     this->setText(WalletInfo);
 }
-
+/* Checking if threre is all currancies in City wallet */
 bool City::IsThereAllCurrsInCity(int iNum)
 {
     if(this->m_aVault.size() == iNum)
