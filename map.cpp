@@ -232,7 +232,10 @@ void Map::on_AddCountryButton_clicked()
             && end.GetX() >= 1
             && end.GetY() >= 1)
     {
-        bool IsCountryOverlay = CheckCountryOverlay(start, end);
+        /* Convert values (decreased by 1 ) */
+        Point converted_start_value(start.GetX() - 1, start.GetY() - 1);
+        Point converted_end_value(end.GetX() - 1, end.GetY() - 1);
+        bool IsCountryOverlay = CheckCountryOverlay(converted_start_value, converted_end_value);
 
         if(IsCountryOverlay)
         {
@@ -244,11 +247,11 @@ void Map::on_AddCountryButton_clicked()
         }
         else
         {
-            start.SetX(start.GetX() - 1);
-            start.SetY(start.GetY() - 1);
-            end.SetX(end.GetX() - 1);
-            end.SetY(end.GetY() - 1);
-            Country *pNewCountry = new Country(this->GetCountryNumber(), start, end, this->m_aCells);
+
+            Country *pNewCountry = new Country(this->GetCountryNumber(),
+                                               converted_start_value,
+                                               converted_end_value,
+                                               this->m_aCells);
 
             this->m_aCountries.push_back(pNewCountry);
             this->IncCountryNum(1);
