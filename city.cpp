@@ -73,10 +73,10 @@ void City::ChangeVaultVal(int ID, int iValNew)
 
 bool City::CheckVault()
 {
-    QMap<int, int>::iterator i;
+    std::map<int, int>::iterator i;
     for(i = this->m_aVault.begin(); i != this->m_aVault.end(); ++i)
     {
-        if(i.value() <= 0)
+        if(i->second <= 0)
             return false;
     }
     return true;
@@ -85,12 +85,12 @@ bool City::CheckVault()
 int City::GetForeignSum()
 {
     int iForeignSum = 0;
-    QMap<int, int>::Iterator i;
+    std::map<int, int>::iterator i;
 
     for(i = this->m_aVault.begin(); i != this->m_aVault.end(); ++i)
     {
-        if(i.key() != this->GetCoutnryID())
-            iForeignSum += i.value();
+        if(i->first != this->GetCoutnryID())
+            iForeignSum += i->second;
     }
     return iForeignSum;
 }
@@ -98,11 +98,11 @@ int City::GetForeignSum()
 int City::GetVaultSum()
 {
     int iSum = 0;
-    QMap<int, int>::iterator i;
+    std::map<int, int>::iterator i;
 
     for(i = this->m_aVault.begin(); i != this->m_aVault.end(); ++i)
     {
-        iSum += i.value();
+        iSum += i->second;
     }
     return iSum;
 }
@@ -136,15 +136,15 @@ void City::SendMoney(City *Neighb)
         }
         else
         {
-            QMap<int, int>::iterator i;
+            std::map<int, int>::iterator it;
             if(bFlag)
             {
-                for(i = this->m_aVault.end(); i != this->m_aVault.begin(); --i)
+                for(it = this->m_aVault.end(); it != this->m_aVault.begin(); --it)
                 {
-                    if(i.key() != this->GetCoutnryID() && i.value() > 0)
+                    if(it->first != this->GetCoutnryID() && it->second > 0)
                     {
-                        this->DecreaseVaultVal(i.key(), 1);
-                        Neighb->IncreaseVaultVal(i.key(), 1);
+                        this->DecreaseVaultVal(it->first, 1);
+                        Neighb->IncreaseVaultVal(it->first, 1);
                         break;
                     }
                 }
@@ -152,12 +152,12 @@ void City::SendMoney(City *Neighb)
             }
             else
             {
-                for(i = this->m_aVault.begin(); i != this->m_aVault.end(); ++i)
+                for(it = this->m_aVault.begin(); it != this->m_aVault.end(); ++it)
                 {
-                    if(i.key() != this->GetCoutnryID() && i.value() > 0)
+                    if(it->first != this->GetCoutnryID() && it->second > 0)
                     {
-                        this->DecreaseVaultVal(i.key(), 1);
-                        Neighb->IncreaseVaultVal(i.key(), 1);
+                        this->DecreaseVaultVal(it->first, 1);
+                        Neighb->IncreaseVaultVal(it->first, 1);
                         break;
                     }
                 }
@@ -171,10 +171,10 @@ void City::UpdateCityInfo()
 {
     QString WalletInfo = tr("ID: ") +
                          QString::number(this->GetCoutnryID()) + tr("\n");
-    QMap<int, int>::iterator i;
+    std::map<int, int>::iterator i;
     for(i = this->m_aVault.begin(); i != this->m_aVault.end(); ++i)
     {
-        WalletInfo += tr("Wallet #") + QString::number(i.key()) + tr(": ") + QString::number(i.value()) + tr("\n");
+        WalletInfo += tr("Wallet #") + QString::number(i->first) + tr(": ") + QString::number(i->second) + tr("\n");
     }
 
     this->setText(WalletInfo);
