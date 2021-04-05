@@ -14,7 +14,7 @@ private:
     /* If it is City = true */
     bool m_bIsCity;
     int m_iCountryID;
-    std::map<int, int> m_aVault;
+    QMap<int, int> m_aVault;
 
 public:
     explicit City(QPushButton *parent = nullptr);
