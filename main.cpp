@@ -1,5 +1,6 @@
 #include "startwindow.h"
-
+#include <time.h>
+#include <stdlib.h>
 #include <QApplication>
 
 int main(int argc, char *argv[])
