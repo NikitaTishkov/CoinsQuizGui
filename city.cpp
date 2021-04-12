@@ -73,8 +73,8 @@ void City::ChangeVaultVal(int ID, int iValNew)
 
 bool City::CheckVault()
 {
-    QMap<int, int>::iterator i;
-    for(i = this->m_aVault.begin(); i != this->m_aVault.end(); ++i)
+    QMap<int, int>::const_iterator i;
+    for(i = this->m_aVault.constBegin(); i != this->m_aVault.constEnd(); ++i)
     {
         if(i.value() <= 0)
             return false;
@@ -85,9 +85,9 @@ bool City::CheckVault()
 int City::GetForeignSum()
 {
     int iForeignSum = 0;
-    QMap<int, int>::Iterator i;
+    QMap<int, int>::const_iterator i;
 
-    for(i = this->m_aVault.begin(); i != this->m_aVault.end(); ++i)
+    for(i = this->m_aVault.constBegin(); i != this->m_aVault.constEnd(); ++i)
     {
         if(i.key() != this->GetCoutnryID())
             iForeignSum += i.value();
@@ -98,9 +98,9 @@ int City::GetForeignSum()
 int City::GetVaultSum()
 {
     int iSum = 0;
-    QMap<int, int>::iterator i;
+    QMap<int, int>::const_iterator i;
 
-    for(i = this->m_aVault.begin(); i != this->m_aVault.end(); ++i)
+    for(i = this->m_aVault.constBegin(); i != this->m_aVault.constEnd(); ++i)
     {
         iSum += i.value();
     }
@@ -122,7 +122,7 @@ bool City::IsNeighbourTo(City Neighb)
 void City::SendMoney(City *Neighb)
 {
     srand(time(NULL));
-    for(int i = 1; i <= COINS_PER_DAY; i++)
+    for(int j = 1; j <= COINS_PER_DAY; j++)
     {
         double fChanceToSendForeign = ( static_cast<double>(this->GetForeignSum()) / this->GetVaultSum() ) + 0.2;
         double fSenForeignTreshold = static_cast <double>(rand()) / RAND_MAX;
@@ -137,15 +137,16 @@ void City::SendMoney(City *Neighb)
         }
         else
         {
-            QMap<int, int>::iterator i;
+            QMap<int, int>::const_iterator it;
             if(bFlag)
             {
-                for(i = this->m_aVault.end(); i != this->m_aVault.begin(); --i)
+
+                for(it = this->m_aVault.constBegin(); it != this->m_aVault.constEnd(); ++it)
                 {
-                    if(i.key() != this->GetCoutnryID() && i.value() > 0)
+                    if(it.key() != this->GetCoutnryID() && it.value() > 0)
                     {
-                        this->DecreaseVaultVal(i.key(), 1);
-                        Neighb->IncreaseVaultVal(i.key(), 1);
+                        this->DecreaseVaultVal(it.key(), 1);
+                        Neighb->IncreaseVaultVal(it.key(), 1);
                         break;
                     }
                 }
@@ -153,12 +154,13 @@ void City::SendMoney(City *Neighb)
             }
             else
             {
-                for(i = this->m_aVault.begin(); i != this->m_aVault.end(); ++i)
+
+                for(it = (this->m_aVault).constBegin(); it != (this->m_aVault).constEnd(); ++it)
                 {
-                    if(i.key() != this->GetCoutnryID() && i.value() > 0)
+                    if(it.key() != this->GetCoutnryID() && it.value() > 0)
                     {
-                        this->DecreaseVaultVal(i.key(), 1);
-                        Neighb->IncreaseVaultVal(i.key(), 1);
+                        this->DecreaseVaultVal(it.key(), 1);
+                        Neighb->IncreaseVaultVal(it.key(), 1);
                         break;
                     }
                 }
@@ -172,8 +174,8 @@ void City::UpdateCityInfo()
 {
     QString WalletInfo = tr("ID: ") +
                          QString::number(this->GetCoutnryID()) + tr("\n");
-    QMap<int, int>::iterator i;
-    for(i = this->m_aVault.begin(); i != this->m_aVault.end(); ++i)
+    QMap<int, int>::const_iterator i;
+    for(i = this->m_aVault.constBegin(); i != this->m_aVault.constEnd(); ++i)
     {
         WalletInfo += tr("Wallet #") + QString::number(i.key()) + tr(": ") + QString::number(i.value()) + tr("\n");
     }
