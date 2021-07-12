@@ -1,0 +1,126 @@
+TestCases:
+
+#1
+Size: 1x1
+Country num: 1
+Steps: 1
+Expected: 0 days
+Result: 2 days, NOW: 0 days
+Status: Fixed 
+
+#2
+Size: 1x2
+Country num: 1
+Steps: 1
+Expected: 0 days
+Result: 2 days, NOW: 1 days
+Status: Fixed
+
+#3
+Size: 1x2
+Country num: 1
+Steps: 5
+Expected: 0 days
+Result: 6 days, NOW: 0 days
+Status: Fixed
+#4
+Size: 1x2
+Country num: 2
+Steps: 1
+Expected: No Result 
+Result: No Result
+Status: Fixed
+
+#5
+Size: 1x2
+Country num: 2
+Steps: 2
+Expected: 1 days
+Result: 1 days
+Status: Fixed
+
+#6
+Size: 1x2
+Country num: 2
+Steps: 6
+Expected: 1 days
+Result: 1 days
+Status: Fixed
+
+#7
+Size: 2x2 
+Country num: 2
+Steps: 1
+Expected: No Result
+Result: No Result
+Status: Succeed 
+
+#8
+Size: 2x2 
+Country num: 2
+First country: 1:1 - 2:1
+Second country: 1:2 - 2:2
+Steps: 2
+Expected: 1 days
+Result: 1 days
+Status: Succeed
+
+#9
+Size: 2x2
+Country num: 2
+First country: 1:1 - 1:2
+Second country: 2:1 - 2:2
+Steps: 1
+Expected: No Result
+Result: No Result
+Status: Succeed
+
+#10
+Size: 2x2
+Country num: 2
+First country: 1:1 - 1:2
+Second country: 2:1 - 2:2
+Steps: 2
+Expected: 1 days
+Result: 1 days
+Status: Succeed
+
+#11
+Size:
+Country num:
+Steps:
+Expected:
+Result:
+Status:
+
+#
+Size:
+Country num:
+Steps:
+Expected:
+Result:
+Status:
+
+#
+Size:
+Country num:
+Steps:
+Expected:
+Result:
+Status:
+
+#
+Size:
+Country num:
+Steps:
+Expected:
+Result:
+Status:
+
+#
+Size:
+Country num:
+Steps:
+Expected:
+Result:
+Status:

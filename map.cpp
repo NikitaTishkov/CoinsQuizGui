@@ -283,12 +283,10 @@ bool Map::CheckAll()
 void Map::on_StepButton_clicked()
 {
     int iStepsNum = ui->inputStep->text().toInt();
-    this->IncreaseDaysWorked(iStepsNum);
     for(int j = 0; j < iStepsNum; j++)
     {
         if(CheckAll())
         {
-            this->IncreaseDaysWorked(j + 1);
             QMessageBox DoneMsg;
             DoneMsg.setWindowTitle("Done!");
             DoneMsg.setText("All Cities have all currencies");
@@ -299,6 +297,7 @@ void Map::on_StepButton_clicked()
         }
         for(int i = 0; i < this->m_aCountries.size(); i++)
             this->InitTransactionForCountry(this ,this->m_aCountries[i]);
+        this->IncreaseDaysWorked(1);
     }
     UpdateMap();
 }
