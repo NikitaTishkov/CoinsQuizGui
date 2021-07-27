@@ -144,35 +144,16 @@ void City::SendMoney(City *Neighb)
         else
         {
             QMap<int, int>::const_iterator it;
-            if(bFlag)
+            for(it = this->m_aVault.constBegin(); it != this->m_aVault.constEnd(); ++it)
             {
-
-                for(it = this->m_aVault.constBegin(); it != this->m_aVault.constEnd(); ++it)
+                if(it.key() != this->GetCoutnryID() && it.value() > 0)
                 {
-                    if(it.key() != this->GetCoutnryID() && it.value() > 0)
-                    {
-                        this->DecreaseVaultVal(it.key(), 1);
-                        Neighb->IncreaseVaultVal(it.key(), 1);
-                        break;
-                    }
+                    this->DecreaseVaultVal(it.key(), 1);
+                    Neighb->IncreaseVaultVal(it.key(), 1);
                 }
-                bFlag = !bFlag;
-            }
-            else
-            {
-
-                for(it = (this->m_aVault).constBegin(); it != (this->m_aVault).constEnd(); ++it)
-                {
-                    if(it.key() != this->GetCoutnryID() && it.value() > 0)
-                    {
-                        this->DecreaseVaultVal(it.key(), 1);
-                        Neighb->IncreaseVaultVal(it.key(), 1);
-                        break;
-                    }
-                }
-                bFlag = !bFlag;
             }
         }
+
     }
 }
 /* Illustrate data of City */
