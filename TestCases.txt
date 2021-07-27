@@ -58,8 +58,8 @@ Status: Succeed
 #8
 Size: 2x2 
 Country num: 2
-First country: 1:1 - 2:1
-Second country: 1:2 - 2:2
+1 country: 1:1 - 2:1
+2 country: 1:2 - 2:2
 Steps: 2
 Expected: 1 days
 Result: 1 days
@@ -68,8 +68,8 @@ Status: Succeed
 #9
 Size: 2x2
 Country num: 2
-First country: 1:1 - 1:2
-Second country: 2:1 - 2:2
+1 country: 1:1 - 1:2
+2 country: 2:1 - 2:2
 Steps: 1
 Expected: No Result
 Result: No Result
@@ -78,49 +78,66 @@ Status: Succeed
 #10
 Size: 2x2
 Country num: 2
-First country: 1:1 - 1:2
-Second country: 2:1 - 2:2
+1 country: 1:1 - 1:2
+2 country: 2:1 - 2:2
 Steps: 2
 Expected: 1 days
 Result: 1 days
 Status: Succeed
 
 #11
-Size:
-Country num:
-Steps:
-Expected:
-Result:
-Status:
+Size: 2x2
+Country num: 3
+1 country: 1:1 
+2 country: 2:1
+3 country: 1:2
+Steps: 2
+Expected: 2 - 10 days
+Result: 9 days
+Status: Succeed
 
-#
-Size:
-Country num:
-Steps:
-Expected:
-Result:
-Status:
+#12
+Size: 2x2
+Country num: 3
+1 country: 1:1
+2 country: 2:1
+3 country: 1:2 - 2:2
+Steps: 1 - 3 days
+Expected: 1 - 10
+Result: 3 days
+Status: Succeed
 
-#
-Size:
-Country num:
-Steps:
-Expected:
-Result:
-Status:
+#13
+Size: 2x2 
+Country num: 3
+1 country: 1:1 - 1:2
+2 country: 2:1
+3 country: 2:2
+Steps: 1 - 3 days
+Expected: 1 - 10
+Result: 8
+Status: Succeed
 
-#
-Size:
-Country num:
-Steps:
-Expected:
-Result:
-Status:
+#14
+Size: 3x3
+Country num:3
+Steps: 2
+Expected: 10 - 50
+Result: 28
+Status: Succeed
 
-#
-Size:
-Country num:
-Steps:
-Expected:
+#15
+Size: 3x3
+Country num: 4
+Steps: 2
+Expected: 10 - 50
+Result: 9
+Status: Succeed
+
+#16
+Size: 3x3
+Country num: 5
+Steps: 2
+Expected: 10 - 50
 Result:
 Status:

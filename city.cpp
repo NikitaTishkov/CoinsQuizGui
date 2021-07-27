@@ -121,12 +121,18 @@ bool City::IsNeighbourTo(City Neighb)
 /* Sending money between two cities */
 void City::SendMoney(City *Neighb)
 {
-    srand(time(NULL));
+    //srand(time(NULL));
     for(int j = 1; j <= COINS_PER_DAY; j++)
     {
-        double fChanceToSendForeign = ( static_cast<double>(this->GetForeignSum()) / this->GetVaultSum() ) + 0.2;
-        double fSenForeignTreshold = static_cast <double>(rand()) / RAND_MAX;
+        srand(time(NULL));
+        double fChanceToSendForeign = ( static_cast<double>(this->GetForeignSum()) / this->GetVaultSum() ) + 0.5;
+        double fSenForeignTreshold = static_cast <double>(rand() % 100) / 100;
         static bool bFlag = true;
+
+        if(j == 1 || j == 999)
+        {
+            this->GetVaultSum();
+        }
 
         if((fChanceToSendForeign == 0 || fChanceToSendForeign < fSenForeignTreshold) &&
                 this->m_aVault[this->GetCoutnryID()] > 0)

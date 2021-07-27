@@ -40,8 +40,7 @@ public:
     void IncreaseVaultVal(int ID, int iVal);
     void DecreaseVaultVal(int ID, int iVal);
     void ChangeVaultVal(int ID, int iValNew);
-    /* City:: is_valid
-       CHECK: if it can be private*/
+
     bool CheckVault();
 
     void SendMoney(City *Neighb);
